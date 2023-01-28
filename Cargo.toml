@@ -8,7 +8,7 @@ categories = ["rust-patterns"]
 
 authors = ["EngusMaze"]
 license = "MIT OR Apache-2.0"
-readme = "README"
+readme = "README.md"
 
 description = "Code repeating macro"
 documentation = "https://docs.rs/loop-code/"
