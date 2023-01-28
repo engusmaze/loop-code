@@ -3,6 +3,16 @@ name = "loop-code"
 version = "0.5.0"
 edition = "2021"
 
+keywords = ["macro", "loop", "repeat", "code"]
+categories = ["rust-patterns"]
+
+authors = ["EngusMaze"]
+
+description = "Code repeating macro"
+documentation = "https://docs.rs/loop-code/"
+homepage = "https://github.com/engusmaze/loop-code"
+repository = "https://github.com/engusmaze/loop-code"
+
 [lib]
 proc-macro = true
 

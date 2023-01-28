@@ -1,3 +1,8 @@
+//! # Loop code
+//!
+//! `loop_code` gives you macro `loop_code::repeat` which allows you to repeat blocks of code an arbitrary number of times.
+//!
+
 use proc_macro2::{Span, TokenStream};
 use quote::{quote, ToTokens};
 use syn::{
@@ -49,6 +54,33 @@ impl Parse for AdvancedCodeLoop {
     }
 }
 
+/// Repeats code n times
+/// ### Simple example
+/// ```
+/// use loop_code::repeat;
+///
+/// repeat!(5 {
+///     println!("Hello world");
+/// });
+/// ```
+/// ---
+/// ### Loop with indexing
+/// ```
+/// use loop_code::repeat;
+///
+/// repeat!(INDEX 5 {
+///     println!("Index: {}", INDEX);
+/// });
+/// ```
+/// ---
+/// ### Change index type
+/// ```
+/// use loop_code::repeat;
+///
+/// repeat!(I i32 5 {
+///     println!("Index: {}", I - 32);
+/// });
+/// ```
 #[proc_macro]
 pub fn repeat(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
     let input = TokenStream::from(input);
@@ -58,7 +90,9 @@ pub fn repeat(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
             let block = &code_loop.block;
             let variable = &code_loop.index_variable;
             let kind = &code_loop.number_type;
+
             let lit = LitInt::new(&i.to_string(), Span::call_site());
+
             quote! {
                 {
                     const #variable: #kind = #lit;
